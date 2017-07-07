@@ -5,7 +5,7 @@
 <div class="container ufps-fix-navbar-fixed">
     <div class="ufps-col-12 ufps-col-tablet-12">
 
-        <!--Encabezado del Laboratorio-->
+        <!--Laboratorio-->
         <section>
 
         <div class="panel panel-default">
@@ -22,21 +22,21 @@
 
         <!--inicio de session-->
         <section>
-
+            @include('flash::message')
         <div class="panel panel-default">
             <div class="panel-body">
 
-                <form class="form-horizontal">
+                {!! Form::open(['route' => 'store', 'method' => 'POST']) !!}
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">Usuario</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Usuario">
+                            {!! Form::text('usuario',null,['class' => 'form-control','placeholder'=>'Usuario', 'required']) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label">Contraseña</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Contraseña">
+                            {!! Form::password('clave', ['class' => 'form-control','placeholder'=>'Contraseña', 'required']) !!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -50,10 +50,10 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn ufps-btn">Ingresar</button>
+                            {!! Form::submit('Registrar',['class'=>'btn ufps-btn']) !!}
                         </div>
                     </div>
-                </form>
+                {!! Form::close() !!}
 
             </div>
         </div>

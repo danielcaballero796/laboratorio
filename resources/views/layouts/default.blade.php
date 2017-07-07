@@ -21,7 +21,7 @@
         <div class="ufps-container">
 
             <div class="ufps-navbar-right">
-                <a href="descarga.html" class="ufps-navbar-btn ufps-active">Cerrar Session</a>
+                <a href="index" class="ufps-navbar-btn ufps-active">Cerrar Session</a>
             </div>
             <div class="ufps-navbar-left">
                 <div class="ufps-navbar-corporate">
@@ -38,8 +38,6 @@
     </div>
 
 @yield('content')
-
-@include('flash::message')
 
 <script src="js/ufps.js"></script>
 </body>

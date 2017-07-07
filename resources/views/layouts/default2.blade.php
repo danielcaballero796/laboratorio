@@ -36,8 +36,6 @@
 
 @yield('content')
 
-@include('flash::message')
-
 <script src="js/ufps.js"></script>
 </body>
 

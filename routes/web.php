@@ -11,6 +11,41 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['prefix' => '/'], function (){
+    Route::resource('/','HomeController');
 });
+
+Route::group(['prefix' => '/practica'], function (){
+    Route::resource('/practica','PracticaController');
+});
+
+Route::get('/index','HomeController@index');
+
+Route::get('info/{id}',[
+    'uses' => 'HomeController@info',
+    'as'   => 'info'
+]);
+
+Route::get('ver/{id}',[
+    'uses' => 'HomeController@ver',
+    'as'   => 'ver'
+]);
+
+Route::get('practica',[
+    'uses' => 'PracticaController@practicando',
+    'as'   => 'practica'
+]);
+
+//cerrar sesion de practica
+Route::get('practica/index','PracticaController@index');
+
+Route::get('consulta/{id}',[
+    'uses' => 'HomeController@practicar',
+    'as'   => 'practicar'
+]);
+
+
+
+
+

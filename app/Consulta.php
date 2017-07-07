@@ -3,6 +3,7 @@
 namespace laboratorio;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Consulta extends Model
 {

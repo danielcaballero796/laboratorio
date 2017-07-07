@@ -3,6 +3,7 @@
 namespace laboratorio;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Practica extends Model
 {
@@ -10,13 +11,15 @@ class Practica extends Model
 
     protected $table = 'practica';
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'usuario', 'idconsulta', 'id', 'sql', 'fecha', 'resultado',
+        'usuario', 'idconsulta', 'sql','resultado'
     ];
 
     /**
