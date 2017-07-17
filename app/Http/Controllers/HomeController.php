@@ -28,10 +28,8 @@ class HomeController extends Controller
             flash('No se ha encontrado en el sistema un usuario con esos datos, verifiquelos')->error();
             return redirect('/');
         }else{
-
-           $usuario = DB::select($sql)[0]->usuario;
-           $nombre = DB::select($sql)[0]->nombre;
-           $clave = DB::select($sql)[0]->clave;
+            session_start();
+           $_SESSION['estudiante'] = DB::select($sql)[0]->usuario;
 
            //para obtener el lisitado de los ejercicios mostrados despues del login
            $datos = Problema::orderBy('id','ASC')->paginate(5);
@@ -86,7 +84,7 @@ class HomeController extends Controller
     {
         //para obtener el lisitado de los ejercicios mostrados despues del login
         $datos = Tabla::orderBy('idproblema','ASC')->paginate(5);
-        return view('informacion')->with('todos', $datos);
+        return view('tablasdominio')->with('todos', $datos);
 
     }
 

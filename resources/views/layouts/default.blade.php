@@ -17,25 +17,25 @@
 
 <body>
 
-    <div class="ufps-navbar ufps-navbar-fixed ufps-navbar-light" id="menuPrincipal">
-        <div class="ufps-container">
+<div class="ufps-navbar ufps-navbar-fixed ufps-navbar-light" id="menuPrincipal">
+    <div class="ufps-container">
 
-            <div class="ufps-navbar-right">
-                <a href="index" class="ufps-navbar-btn ufps-active">Cerrar Session</a>
-            </div>
-            <div class="ufps-navbar-left">
-                <div class="ufps-navbar-corporate">
-                    <img src="img/logo_ingsistemas.png" alt="">
-                    <img src="img/logo_ufps.png" alt="">
-                </div>
-            </div>
-
-            <div class="ufps-navbar-brand">
-                Laboratorio SQL
-            </div>
-
+        <div class="ufps-navbar-right">
+            <a href="index" class="ufps-navbar-btn ufps-active">Cerrar Session</a>
         </div>
+        <div class="ufps-navbar-left">
+            <div class="ufps-navbar-corporate">
+                <img src="img/logo_ingsistemas.png" alt="">
+                <img src="img/logo_ufps.png" alt="">
+            </div>
+        </div>
+
+        <div class="ufps-navbar-brand">
+            Laboratorio SQL
+        </div>
+
     </div>
+</div>
 
 @yield('content')
 

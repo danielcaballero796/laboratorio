@@ -21,10 +21,13 @@ class PracticaController extends Controller
      */
     public function store(Request $request)
     {
+        session_start();
         if ($request->seleccione == 'definitiva') {
 
             $nombreBD = DB:: select("SELECT p.nombre as 'nombrebd' FROM consulta c inner join problema p on (c.idproblema=p.id) where c.idproblema = $request->idconsulta")[0]->nombrebd;
+
             $consulta = str_replace("from ", "from " . $nombreBD . '.', $request->sql);//para poder anteponer el nombre de la bd que se usara
+            $consulta = str_replace("join ", "join " . $nombreBD . '.', $consulta);
 
             $cero = count(DB::select($consulta));
 
@@ -34,7 +37,7 @@ class PracticaController extends Controller
                 return view('practicar')->with('todos', $datos);
             } else {
 
-                $uno = DB:: select("select count(*) as 'numero' from final where idconsulta = $request->idconsulta and usuario = '1151267' ")[0]->numero;
+                $uno = DB:: select("select count(*) as 'numero' from final where idconsulta = $request->idconsulta and usuario = '" . $_SESSION['estudiante'] . "'")[0]->numero;
 
                 if ($uno >= 1) {
                     flash('Usted ya realizo un registro como definitivo de esta consulta')->error();
@@ -43,7 +46,7 @@ class PracticaController extends Controller
                 } else {
 
                     $definitiva = new Finals();
-                    $definitiva->usuario = 1151267; //iria la variable de sesion
+                    $definitiva->usuario = $_SESSION['estudiante']; //iria la variable de sesion
                     $definitiva->idconsulta = $request->idconsulta;
                     $definitiva->sql = $request->sql;
                     $definitiva->resultado = 'exito';
@@ -56,12 +59,12 @@ class PracticaController extends Controller
             }
 
 
-        }
-        else if ($request->seleccione == 'practica') {
+        } else if ($request->seleccione == 'practica') {
             try {
                 $nombreBD = DB:: select("SELECT p.nombre as 'nombrebd' FROM consulta c inner join problema p on (c.idproblema=p.id) where c.idproblema = $request->idconsulta")[0]->nombrebd;
 
                 $consulta = str_replace("from ", "from " . $nombreBD . '.', $request->sql);//para poder anteponer el nombre de la bd que se usara
+                $consulta = str_replace("join ", "join " . $nombreBD . '.', $consulta); //para anteponerselo a los join
 
                 $cero = count(DB::select($consulta));
                 $sql = "select numpracticas from consulta where id = $request->idconsulta";
@@ -73,7 +76,7 @@ class PracticaController extends Controller
                     return view('practicar')->with('todos', $datos);
                 } else {
                     //consulta el número de veces que ya practico
-                    $dos = DB:: select("select count(*) as 'numero' from practica where idconsulta = $request->idconsulta and usuario = '1151267' ")[0]->numero;
+                    $dos = DB:: select("select count(*) as 'numero' from practica where idconsulta = $request->idconsulta and usuario = '" . $_SESSION['estudiante'] . "'")[0]->numero;
 
                     if ($numerodef == $dos) {
                         flash('Usted ya realizo los ' . $dos . ' intentos de practica que correspondian a esta consulta')->error();
@@ -81,7 +84,7 @@ class PracticaController extends Controller
                         return view('practicar')->with('todos', $datos);
                     } else {
                         $practica = new Practica();
-                        $practica->usuario = 1151267; //iria la variable de sesion
+                        $practica->usuario = $_SESSION['estudiante']; //iria la variable de sesion
                         $practica->idconsulta = $request->idconsulta;
                         $practica->sql = $request->sql;
                         $practica->resultado = 'exito';
